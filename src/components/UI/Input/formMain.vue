@@ -38,7 +38,7 @@ onMounted(() => {
 async function Submited(){
     try {
    if(formInput.Input.id){
-    await axios.patch(`http://localhost:3000/${storeTitle.kurs}/${formInput.Input.id}`,{
+    await axios.patch(`https://jsonserver-production-2b69.up.railway.app/${storeTitle.kurs}/${formInput.Input.id}`,{
         "fullName": formInput.Input.fullName,
         "phone": formInput.Input.phone,
         "pasportNUmber": formInput.Input.pasportNUmber,
@@ -49,7 +49,7 @@ async function Submited(){
      selectDate.value = true
    }
    else{
-     await axios.post(`http://localhost:3000/${selectValue.value}`,{
+     await axios.post(`https://jsonserver-production-2b69.up.railway.app/${selectValue.value}`,{
         "fullName": formInput.Input.fullName,
         "phone": formInput.Input.phone,
         "pasportNUmber": formInput.Input.pasportNUmber,

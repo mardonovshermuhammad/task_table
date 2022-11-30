@@ -22,7 +22,7 @@ const Password = ref<boolean>(false)
     if (loginValue.Input.name == "admin" && loginValue.Input.password == '12345678'){
       try {
         console.log(loginValue.Input);
-        const res = await axios.get('http://localhost:3000/autifikatsiya')
+        const res = await axios.get('https://jsonserver-production-2b69.up.railway.app/autifikatsiya')
         localStorage.setItem("access",res.data.token)
         router.push({name:'home'})
       } catch (error){

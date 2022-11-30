@@ -18,7 +18,7 @@ async function selectItem(val:any) {
 }
  async function Deletes(id: number) {
     try {
-       await axios.delete(`http://localhost:3000/${selectValue.value}/${id}`);
+       await axios.delete(`https://jsonserver-production-2b69.up.railway.app/${selectValue.value}/${id}`);
        getItems(`${selectValue.value}`)
     } catch (error){
        alert(error)
@@ -26,7 +26,7 @@ async function selectItem(val:any) {
 }
 async function Edits(id:number){
     try {
-        const res = await axios.get(`http://localhost:3000/${selectValue.value}/${id}`)
+        const res = await axios.get(`https://jsonserver-production-2b69.up.railway.app/${selectValue.value}/${id}`)
         store.Items(res.data)
         storeTitle.editKurs(selectValue.value)
         router.push({name: 'home'})
@@ -35,7 +35,7 @@ async function Edits(id:number){
     }
 }
 async function getItems(name:any) {
-    const res =  await axios.get(`http://localhost:3000/${name}`);
+    const res =  await axios.get(`https://jsonserver-production-2b69.up.railway.app/${name}`);
     Items.value = res.data 
 }
 </script>
