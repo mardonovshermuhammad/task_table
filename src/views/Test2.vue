@@ -1,103 +1,7 @@
 <script setup lang="ts">
-import { ref, watch } from "vue"
-const questions = ref<any[]>([
-    {
-        question: "1 chi savol",
-        answer: '1 javob',
-        type:'test',
-        options:[
-            '1 javob','2 javob','3 javob',
-        ],
-    },
-    {
-        question: " 2 chi savol 16x16 ?",
-        answer: '256',
-        type:'yozma',
-        value: "",
-
-    },
-    {
-        question: "3 chi savol",
-        answer: '3 javob',
-        answer2: '1 javob',
-        type:'checkbox',
-        options:[
-            { text: '1 javob', check: false},
-            { text: '2 javob', check: false},
-            { text: '3 javob', check: false},
-            { text: '4 javob', check: false},
-        ],
-    },
-    {
-        question: "4 chi savol",
-        answer: '1 javob',
-        type:'test',
-        options:[
-            '1 javob','2 javob','3 javob','4 javob',
-        ],
-    },
-    {
-        question: " 5 chi savol 15x15 ?",
-        answer: '225',
-        type:'yozma',
-        value: "",
-
-    },
-    {
-        question: "6 chi savol",
-        answer: '3 javob',
-        answer2: '1 javob',
-        type:'checkbox',
-        options:[
-            { text: '1 javob', check: false},
-            { text: '2 javob', check: false},
-            { text: '3 javob', check: false},
-            { text: '4 javob', check: false},
-        ],
-    },
-    {
-        question: "7 chi savol",
-        answer: '1 javob',
-        type:'test',
-        options:[
-            '1 javob','2 javob','3 javob',
-        ],
-    },
-    {
-        question: " 8 chi savol 20x20 ?",
-        answer: '400',
-        type:'yozma',
-        value: "",
-
-    },
-    {
-        question: "9 chi savol",
-        answer: '3 javob',
-        answer2: '1 javob',
-        type:'checkbox',
-        options:[
-            { text: '1 javob', check: false},
-            { text: '2 javob', check: false},
-            { text: '3 javob', check: false},
-            { text: '4 javob', check: false},
-        ],
-    },
-    {
-        question: "10 chi savol",
-        answer: '1 javob',
-        type:'test',
-        options:[
-            '1 javob','2 javob','3 javob',
-        ],
-    },
-])
-watch(questions.value,()=>{
-       if (questions.value[QuizValue.value-1].type !="checkbox") {
-         disabled.value = true
-       }
-   
-    
-})
+import { ref, watch,onMounted } from "vue"
+import axios from "axios";
+const questions = ref<any[]>([])
 const quizComplated = ref<boolean>(false)
 const disabled = ref<boolean>(false)
 const answerValue = ref<any>('')
@@ -106,9 +10,28 @@ const checkMassiv = ref<any[]>([])
 const checkTrue = ref<boolean>(false)
 const QuizValue = ref<number>(1)
 const answerAll = ref<number>(0)
+onMounted( ()=>{
+    DateMassiv() 
+})
+
+async function DateMassiv() {
+    try {
+    const res  = await axios.get(`https://jsonserver-production-2b69.up.railway.app/test`)
+    questions.value = res.data
+    } catch (error) {
+        alert(error)
+    }
+}
 const setAnswer = (id:any) =>{
      const item = document.getElementsByClassName('LabelId')
-      answerValue.value =item[id].textContent  
+      answerValue.value =item[id].textContent 
+      disabled.value = true 
+}
+const TypeTextInput = (val:any)=>{
+    if (val.target.value !="") {
+        disabled.value = true 
+    }
+    
 }
 const setAnswerChecked = (val:any)=>{
 
@@ -132,7 +55,7 @@ const setAnswerChecked = (val:any)=>{
          }
        });
 }
-function NextQuestion(){
+async function NextQuestion(){
     disabled.value = false
     if (QuizValue.value < questions.value.length){
         QuizValue.value++;
@@ -154,7 +77,7 @@ function NextQuestion(){
         QuizValue.value = 1
         checkTrue.value = false
         
-    }
+    }  
 }
 function Restart(){
     location.reload();
@@ -172,7 +95,7 @@ function Restart(){
                 <span class="ml-3">   score {{ QuizValue }}/{{ questions.length }}</span>
                 </div>
                <div v-if="questions[i].type == 'yozma'">
-                <input v-model="questions[i].value" class="border-2" type="text">
+                <input  v-model="questions[i].value" @input="TypeTextInput" class="border-2" type="text">
                </div>
                 <div v-if="questions[i].type == 'test'" class="flex flex-col">
                     <label v-for="(option,index) in item.options" :key="index">

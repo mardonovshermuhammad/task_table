@@ -22,7 +22,7 @@ function Logout(){
           <p @click="router.push({name: 'home'})" class="block py-2 pl-3 pr-4 text-gray-700 rounded cursor-pointer
            hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:hover:text-blue-700 md:p-0
             dark:text-gray-400 md:dark:hover:text-white dark:hover:bg-gray-700 dark:hover:text-white
-             md:dark:hover:bg-transparent">Home</p>
+             md:dark:hover:bg-transparent">Add student</p>
         </li>
         <li>
           <a @click="router.push({name: 'table'} )" class="block py-2 pl-3 pr-4 text-gray-700 rounded cursor-pointer
@@ -30,11 +30,18 @@ function Logout(){
            md:dark:hover:text-white dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent">Table</a>
         </li>
         <li>
+          <a @click="router.push({name: 'AddTest'} )" class="block py-2 pl-3 pr-4 text-gray-700 rounded cursor-pointer
+           hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:hover:text-blue-700 md:p-0
+            dark:text-gray-400 md:dark:hover:text-white dark:hover:bg-gray-700
+             dark:hover:text-white md:dark:hover:bg-transparent">add test</a>
+        </li>
+        <li>
           <a @click="router.push({name: 'test'} )" class="block py-2 pl-3 pr-4 text-gray-700 rounded cursor-pointer
            hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:hover:text-blue-700 md:p-0
             dark:text-gray-400 md:dark:hover:text-white dark:hover:bg-gray-700
              dark:hover:text-white md:dark:hover:bg-transparent">Test</a>
         </li>
+        
       </ul>
     </div>
     <div>
